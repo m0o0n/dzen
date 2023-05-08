@@ -69,7 +69,6 @@ class ProductController {
             })
         }
 
-        // {value: 2222, isDefault: 0, symbol: "uah"}
         return res.json(product)
     }
 

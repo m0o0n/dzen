@@ -46,10 +46,9 @@ Product.hasMany(ProductPrice, { as: 'price' })
 ProductPrice.belongsTo(Product)
 
 Product.hasOne(Guarantee, { as: 'guarantee', foreignKey: 'productId' })
-// Guarantee.belongsTo(Product, { foreignKey: 'productsId' })
 
-Order.belongsToMany(Product, { through: OrderProduct, as: 'project' })
-Product.belongsToMany(Order, { through: OrderProduct })
+Order.hasMany(OrderProduct)
+OrderProduct.belongsTo(Product)
 
 module.exports = {
     Order,
