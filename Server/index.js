@@ -6,7 +6,7 @@ const cors = require('cors')
 const models = require('./models/models')
 const router = require('./routes/index')
 const path = require('path')
-
+const errorHandler = require('./error/ApiError')
 const PORT = process.env.PORT || 5000
 
 const app = express()
@@ -16,6 +16,7 @@ app.use(fileUpload({}))
 
 app.use('/api', router)
 app.use(express.static(path.resolve(__dirname, 'static')))
+app.use(errorHandler)
 
 app.get('/', (req, res) => {
     res.status(200).json({ message: 'working' })
