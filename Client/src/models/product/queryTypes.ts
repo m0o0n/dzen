@@ -1,10 +1,4 @@
-import { ProductGuaranteeType, ProductPriceType, ProductType } from "./product";
-
-export interface ProductResponseType extends ProductType {
-    createdAt: string
-    updatedAt: string
-    typeId: string
-}
+import { ProductGuaranteeType, ProductPriceType } from "./product";
 
 export interface ProudctRequestType {
     title: string,

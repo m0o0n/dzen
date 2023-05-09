@@ -1,11 +1,12 @@
+import { ProductType } from './../models/product/product';
 import { AxiosRequestConfig, AxiosResponse } from "axios"
 import $HostInstace from "."
-import { CreatedProductResponseType, ProductResponseType, ProudctRequestType } from "../models/product/queryTypes"
+import { CreatedProductResponseType, ProudctRequestType } from "../models/product/queryTypes"
 
 
 const getAll = async () => {
     try {
-        const { data } = await $HostInstace.get<ProductResponseType[]>('product')
+        const { data } = await $HostInstace.get<ProductType[]>('product')
         return data
     } catch (e: any) {
         throw new Error(e.message)

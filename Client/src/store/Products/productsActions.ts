@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { deleteOrder } from '../../api/orders';
 import { getAll } from '../../api/products';
-const getAllProductsThunk = createAsyncThunk(
+const fetchAllProductsThunk = createAsyncThunk(
     'products/getAll',
     (_, thunkAPI) => {
         try {
@@ -30,4 +30,4 @@ const deleteProudctThunk = createAsyncThunk(
     }
 )
 
-export { getAllProductsThunk, deleteProudctThunk }
+export { fetchAllProductsThunk, deleteProudctThunk }

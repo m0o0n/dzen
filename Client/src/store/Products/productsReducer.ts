@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchAllProductsThunk } from './productsActions';
 import { InitialStateType } from './productTypes';
 
 const initialState: InitialStateType = {
@@ -9,7 +10,7 @@ const initialState: InitialStateType = {
             isNew: 1,
             photo: 'pathToFile.jpg',
             title: 'Product 1',
-            type: 'Monitors',
+            typeId: 1,
             specification: 'Specification 1',
             guarantee: {
                 start: '2017-06-29 12:09:33',
@@ -19,8 +20,8 @@ const initialState: InitialStateType = {
                 { value: 100, symbol: 'USD', isDefault: 0 },
                 { value: 2600, symbol: 'UAH', isDefault: 1 }
             ],
-            order: 1,
-            date: '2017-06-29 12:09:33'
+            createdAt: '2017-06-29 12:09:33',
+            updatedAt: '2017-06-29 12:09:33'
         }
     ],
     isLoading: false,
@@ -34,7 +35,24 @@ const productsReducer = createSlice({
 
     },
     extraReducers: {
-
+        [fetchAllProductsThunk.pending.type]: state => {
+            state.isLoading = true
+        },
+        [fetchAllProductsThunk.fulfilled.type]: (
+            state: InitialStateType,
+            action: PayloadAction<any>
+        ) => {
+            state.isLoading = false
+            state.Products = [...state.Products, ...action.payload]
+            console.log(action)
+        },
+        [fetchAllProductsThunk.rejected.type]: (
+            state,
+            action: PayloadAction<any>
+        ) => {
+            state.isLoading = false
+            state.error = action.payload
+        }
     },
 });
 

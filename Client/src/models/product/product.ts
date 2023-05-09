@@ -4,12 +4,12 @@ export interface ProductType {
     isNew: number,
     photo: string,
     title: string,
-    type: string,
+    typeId: number,
     specification: string,
     guarantee: ProductGuaranteeType
     price: Array<ProductPriceType>,
-    order: number,
-    date: string
+    createdAt?: string
+    updatedAt?: string
 }
 
 export type ProductGuaranteeType = {
@@ -23,5 +23,6 @@ export type ProductGuaranteeType = {
 export type ProductPriceType = {
     value: number,
     symbol: string,
-    isDefault: number
+    isDefault: number,
+    productId?: number
 }
