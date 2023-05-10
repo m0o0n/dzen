@@ -36,7 +36,6 @@ const getOne = async (id: number) => {
 const update = async (formData: AxiosRequestConfig<UpdateOrderRequestType>) => {
     try {
         const { data } = await $HostInstace.put<AxiosResponse<OrderResponseType>>('order', formData.data)
-        console.log(data)
         return data
     } catch (e: any) {
         throw new Error(e.message)

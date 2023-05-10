@@ -8,7 +8,6 @@ const fetchAllOrdersThunk = createAsyncThunk(
     (_, thunkAPI) => {
         try {
             const response = getAll()
-            console.log("fetchAllOrdersThunk")
             return response
         } catch (e: any) {
             return thunkAPI.rejectWithValue(

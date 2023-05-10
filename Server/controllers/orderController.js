@@ -8,7 +8,6 @@ class OrderController {
         try {
             const { title, description, products } = req.body
             const order = await Order.create({ title, description })
-            console.log(products)
             if (products) {
                 for (const product of products) {
                     await OrderProduct.create({
