@@ -1,6 +1,6 @@
 const { json, where } = require("sequelize")
 const ApiError = require("../error/ApiError")
-const { Order, OrderProduct, Product } = require("../models/models")
+const { Order, OrderProduct, Product, Guarantee, ProductPrice } = require("../models/models")
 
 class OrderController {
 
@@ -37,7 +37,10 @@ class OrderController {
                 include: [
                     {
                         model: OrderProduct,
-                        include: [Product],
+                        include: [{
+                            model: Product,
+                            include: [{ model: Guarantee, as: "guarantee" }, { model: ProductPrice, as: "price" }]
+                        }],
                     }
                 ]
             })
@@ -52,11 +55,15 @@ class OrderController {
             const { id } = req.params
             const order = await Order.findOne({
                 where: { id },
-                include:
-                {
-                    model: OrderProduct,
-                    include: [Product],
-                }
+                include: [
+                    {
+                        model: OrderProduct,
+                        include: [{
+                            model: Product,
+                            include: [{ model: Guarantee, as: "guarantee" }, { model: ProductPrice, as: "price" }]
+                        }],
+                    }
+                ]
             })
             return res.json(order)
         } catch (e) {

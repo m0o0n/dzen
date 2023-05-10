@@ -1,4 +1,4 @@
-import { CreatedProductResponseType } from './../product/queryTypes';
+import { ProductType } from '../product/product';
 
 export interface OrderResponseType {
     id: number
@@ -6,7 +6,7 @@ export interface OrderResponseType {
     title: string
     createdAt: string
     updatedAt: string
-    order_products: orderProducts[]
+    order_products: Array<orderProducts>
 }
 
 export interface UpdateOrderRequestType {
@@ -25,7 +25,7 @@ export interface orderProducts {
     id: number,
     productId: number
     orderId: number
-    product: CreatedProductResponseType
+    product: ProductType
     createdAt: string
     updatedAt: string
 }

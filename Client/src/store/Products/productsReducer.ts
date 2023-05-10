@@ -1,3 +1,4 @@
+import { ProductType } from './../../models/product/product';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchAllProductsThunk } from './productsActions';
 import { InitialStateType } from './productTypes';
@@ -39,12 +40,11 @@ const productsReducer = createSlice({
             state.isLoading = true
         },
         [fetchAllProductsThunk.fulfilled.type]: (
-            state: InitialStateType,
-            action: PayloadAction<any>
+            state,
+            action: PayloadAction<ProductType[]>
         ) => {
             state.isLoading = false
             state.Products = [...state.Products, ...action.payload]
-            console.log(action)
         },
         [fetchAllProductsThunk.rejected.type]: (
             state,
