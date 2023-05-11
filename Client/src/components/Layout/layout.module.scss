@@ -1,0 +1,210 @@
+
+.layout {
+    position: relative;
+    display: flex;
+    main {
+        height: calc(100vh - 150px);
+        position: relative;
+        flex-grow: 1;
+        padding: 70px 8% 60px 100px;
+        box-sizing: border-box;
+        overflow: hidden;
+        box-shadow: inset -2px -4px 5px -3px rgba(0,0,0,0.75);
+    }
+}
+
+.header {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 150px;
+    
+    max-width: 1920px;
+    &__container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 80%;
+        box-shadow: 3px 2px 8px 0px rgba(0,0,0,0.30);
+        padding-right: 8%;
+        box-sizing: border-box;
+    }
+    &__logo {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100px;
+        flex: 0 0 35%;
+        svg {
+            position: relative;
+            width: 60px;
+            height: 80px;
+        }
+        span {
+            position: relative;
+            align-self: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #88C057;
+            margin-left: 16px;
+        }
+    }
+
+    &__search {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 100px;
+        flex: 0 0 25%;
+        input {
+            width: 220px;
+            padding: 10px 0 10px 8px;
+            box-sizing: border-box;
+            outline: none;
+            border: none;
+            border-radius: 3px;
+            box-shadow: inset 0px 8px 15px -9px rgba(130,130,130,0.75);
+            &::placeholder {
+                font-weight: bold;
+                color: rgb(32, 32, 32);
+                letter-spacing: 0.02em;
+            }
+        }
+    }
+
+    &__time {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        height: 100px;
+        flex: 1 0 auto;
+    }
+
+    &__date {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 35px;
+       
+    }
+
+    &__clock {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+            margin-top: 1px;
+            height: 15px;
+            width: 15px;
+            fill: #88C057;
+            margin: 0 5px;
+        }
+
+    }
+}
+
+.navigation {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    height: calc(100vh - 150px);
+    box-shadow: 2px 3px 10px 0px rgba(130, 130, 130, 0.75);
+
+    &__profile {
+        position: relative;
+        img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-top: 50px;
+        }
+    }
+
+    &__profile_settings {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        width: 40px;
+        height: 40px;
+        right: -5px;
+        bottom: -5px;
+        border-radius: 50%;
+        cursor: pointer;
+    
+        svg {
+            width: 20px;
+            height: 20px;
+            fill: gray;
+        }
+        
+    }
+
+    nav {
+        position: relative;
+        margin-top: 50px;
+        ul {
+            margin: 0;
+            padding: 0;
+            li {
+                list-style: none;
+                text-align: center;
+                margin: 10px 0;
+                a {
+                    
+                    position: relative;
+                    text-decoration: none;
+                    cursor: pointer;
+                    font-weight: 600;
+                    color: rgb(34, 34, 34);
+                    text-transform: uppercase;
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        bottom: -4px;
+                        height: 3px;
+                        background: rgb(34, 34, 34);
+                    }
+
+                    &.active{
+                        font-weight: bold;
+                        &::before {
+                            width: 100%;
+                            animation: none 0s ease-in-out;
+                        }
+                        &:hover{
+                            &::before {
+                                animation: active_underline 0s ease-in-out;
+                            }
+                        }
+                    }
+                    
+                     &:hover {
+                        &::before {
+                            animation: active_underline .4s ease-in-out;
+                            width: 100%;
+                        }
+                    }
+                    @keyframes active_underline {
+                        from{
+                            width: 0%;
+                        }
+                        to {
+                            width: 100%;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}

@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { setupStore } from './store/store';
+import { Orders } from './components/Orders';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Failed to find the root element');
@@ -14,10 +15,11 @@ const store = setupStore()
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-    <Routes>
-    <Route path="/" element={<App />} />
-    </Routes>
-    
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/orders" element={<Orders />} />
+      </Routes>
+
     </BrowserRouter>
 
   </Provider>
