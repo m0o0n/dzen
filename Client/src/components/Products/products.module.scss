@@ -1,0 +1,114 @@
+.products{
+    position: relative;
+    height: 100%;
+}
+.product{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    &__circle {
+        position: relative;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #88C057;
+        margin-right: 10px;
+    }
+    &__image {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        img {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+    }
+
+    &__name {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        flex-grow: 0;
+        max-width: 260px;
+        margin: 0 15px;
+
+        @media (max-width: 1080px) {
+            max-width: 160px;
+            span {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+        span {
+            position: relative;
+            overflow: hidden;
+            white-space: break-word;
+        }
+        p {
+            position: relative;
+            margin: 0;
+            margin-top: 5px;
+            max-width: 50%;
+            font-size: 12px;
+            color: gray;
+        }
+    }
+
+    &__status {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-grow: 2;
+        span {
+            color:  #88C057;
+        }
+    }
+
+    &__garantee, &__cost{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        flex-grow: 1;
+        span {
+            font-size: 10px;
+            color: gray;
+        }
+    }
+
+    &__date {
+        flex-grow: 1;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+            font-size: 12px;
+            color: gray;
+        }
+        
+    }
+
+    button {
+        position: relative;
+        background: transparent;
+        border: none;
+        svg {
+            width: 15px;
+            height: 15px;
+            fill: gray;
+            transition: all 0.3s linear;
+            cursor: pointer;
+            &:hover {
+                fill: rgb(235, 51, 51);
+            }
+        }
+    }
+}

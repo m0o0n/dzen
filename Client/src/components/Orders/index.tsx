@@ -1,19 +1,16 @@
 import React from 'react'
-import { MainLayout } from '../Layout'
+import { MainLayout } from '../common/Layout'
 import style from './order.module.scss'
 import { OrderCard } from './orderCard'
-
+import { ScrollList } from "../common/ScrollList";
+import { Heading } from "../common/Heading";
 const Orders: React.FC = () => {
     return (
         <MainLayout>
             <div className={style.orders}>
-                <div className={style.orders__heading}>
-                    <div className={style.orders__heading__button}>
-                        &#x271A;
-                    </div>
-                    <span>Приході / 25</span>
-                </div>
-                <div className={style.orders__list}>
+                <Heading text="Приходы" count={25} />
+
+                <ScrollList>
                     <OrderCard />
                     <OrderCard />
                     <OrderCard />
@@ -24,7 +21,7 @@ const Orders: React.FC = () => {
                     <OrderCard />
                     <OrderCard />
                     <OrderCard />
-                </div>
+                </ScrollList>
             </div>
         </MainLayout>
     )

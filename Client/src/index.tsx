@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { setupStore } from './store/store';
 import { Orders } from './components/Orders';
+import { Groups } from './components/Groups';
+import { Product } from './components/Products';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Failed to find the root element');
@@ -18,6 +20,11 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/groups" element={<Groups />}>
+          <Route path="/groups/:id" element={<Groups />} />
+        </Route>
+
+        <Route path='/products' element={<Product />} />
       </Routes>
 
     </BrowserRouter>

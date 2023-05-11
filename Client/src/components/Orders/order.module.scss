@@ -3,60 +3,6 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    &__heading {
-        position: relative;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        margin-bottom: 50px;
-        &__button {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            background: #88C057;
-            border: 3px solid rgb(124, 170, 80);
-            line-height: 40px;
-            box-sizing: border-box;
-            color: white;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        span {
-            position: relative;
-            font-size: 25px;
-            font-weight: 700;
-            color: rgb(34, 34, 34);
-            margin-left: 15px;
-        }
-    }
-
-    &__list {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        overflow-y: scroll;
-        
-        &::-webkit-scrollbar {
-            width: 5px;
-        }
-          
-        &::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-           
-          &::-webkit-scrollbar-thumb {
-            background: #888;
-            width: 5px;
-            border-radius: 3px;
-          }
-          &::-webkit-scrollbar-thumb:hover {
-            background: #555; 
-          }
-    }
 }
 
 .order_card {

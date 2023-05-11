@@ -1,6 +1,6 @@
 import React from "react"
-import IconBars from "../icons/IconBars"
-import IconTrash from "../icons/IconTrash"
+import IconBars from "../common/icons/IconBars"
+import IconTrash from "../common/icons/IconTrash"
 import style from './order.module.scss'
 const OrderCard: React.FC = () => {
     return (
