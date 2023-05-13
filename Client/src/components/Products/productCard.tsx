@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import IconTrash from '../common/icons/IconTrash';
+import { Modal } from '../common/Modal';
+import { DeleteProductModal } from '../common/Modal/Products/deleteProductModal';
 import style from './products.module.scss'
 
 type ProductCardPropsType = {
     garantee: boolean | Array<string>
     date: boolean | string
     cost: boolean | Array<string>
+    drop?: boolean
+    status?: boolean | number
 }
 const ProductCard: React.FC<ProductCardPropsType> = (props) => {
+    const [open, setOpen] = useState(false)
     return (
         <div className={style.product}>
             <span className={style.product__circle}></span>
@@ -19,9 +24,14 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
                 <p>S/N 123456789</p>
             </div>
 
-            <div className={style.product__status}>
-                <span>Новый</span>
-            </div>
+            {
+                props.status && (
+                    <div className={style.product__status}>
+                        <span>Новый</span>
+                    </div>
+                )
+            }
+
 
             {
                 props.garantee && (
@@ -49,11 +59,17 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
                 )
             }
 
+            {
+                props.drop && (
+                    <button onClick={() => { setOpen(true) }}>
+                        <IconTrash />
+                    </button>
+                )
+            }
 
-            <button><IconTrash /></button>
+            <DeleteProductModal open={open} setOpen={setOpen} />
 
-
-        </div>
+        </div >
     )
 }
 

@@ -12,7 +12,13 @@ const Product: React.FC<any> = (proos) => {
                 <Heading text='Продукты' count={25} />
 
                 <ScrollList>
-                    <ProductCard garantee={true} date={true} cost={true} />
+                    <ProductCard
+                        status={true}
+                        garantee={true}
+                        date={true}
+                        cost={true}
+                        drop={true}
+                    />
                 </ScrollList>
             </div>
         </MainLayout>

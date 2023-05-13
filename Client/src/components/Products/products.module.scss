@@ -58,6 +58,12 @@
             font-size: 12px;
             color: gray;
         }
+
+        &_size{
+            &_large{
+                max-width: fit-content;
+            }
+        }
     }
 
     &__status {
@@ -111,4 +117,5 @@
             }
         }
     }
+
 }

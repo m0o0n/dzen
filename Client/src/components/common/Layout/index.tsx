@@ -13,7 +13,10 @@ const MainLayout: React.FC<PropsType> = (props) => {
             <Header />
             <div className={style.layout}>
                 <NavBar />
-                <main>{props.children}</main>
+                <main>
+                    {props.children}
+                    <div id="modal"></div>
+                </main>
             </div>
         </>
 

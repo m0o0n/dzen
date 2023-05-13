@@ -27,5 +27,5 @@ const GroupOrder: React.FC<any> = (props) => {
     )
 }
 
-// className={style.group_order}
+
 export { GroupOrder }
