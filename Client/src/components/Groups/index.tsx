@@ -6,13 +6,17 @@ import { Heading } from "../common/Heading";
 import { GroupOrder } from "./groupOrderCard";
 import { ProductCard } from '../Products/productCard';
 import { AddProductModal } from '../common/Modal/Groups/addProductModal';
+import { AddOrderModal } from '../common/Modal/Orders/addOrderModal';
 
 const Groups: React.FC = () => {
-    const [open, setOpen] = useState(false)
+    const [openForAddProduct, setOpenForAddProduct] = useState(false)
+    const [openForAddOrder, setOpenForAddOrder] = useState(false)
     return (
         <MainLayout>
             <div className={style.groups}>
-                <Heading text="Приходы" count={25} />
+                <Heading text="Приходы" count={25} callBack={() => { setOpenForAddOrder(true) }}>
+                    <AddOrderModal setOpen={setOpenForAddOrder} open={openForAddOrder} />
+                </Heading>
                 <div className={style.groups__container}>
                     <div className={style.groups__orders}>
                         <ScrollList>
@@ -35,7 +39,7 @@ const Groups: React.FC = () => {
 
                         <div className={style.groups__order_info}>
                             <h1>Long Long LOngest Name of Order</h1>
-                            <div className={style.groups__order_info__add} onClick={() => { setOpen(true) }}>
+                            <div className={style.groups__order_info__add} onClick={() => { setOpenForAddProduct(true) }}>
                                 <button>&#x271A;</button>
                                 <span>Добавить продукт</span>
                             </div>
@@ -53,7 +57,7 @@ const Groups: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <AddProductModal setOpen={setOpen} open={open} />
+            <AddProductModal setOpen={setOpenForAddProduct} open={openForAddProduct} />
         </MainLayout>
     )
 }

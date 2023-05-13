@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import IconTrash from '../common/icons/IconTrash';
-import { Modal } from '../common/Modal';
 import { DeleteProductModal } from '../common/Modal/Products/deleteProductModal';
 import style from './products.module.scss'
 

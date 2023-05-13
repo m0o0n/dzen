@@ -9,13 +9,15 @@ type Inputs = {
     description: string,
     products: number[]
 };
-const AddOrderModal: React.FC = () => {
+const AddOrderModal: React.FC<any> = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
     return (
         <Modal
             backdrop_classes='modal__backdrop_size_content'
             card_classes='modal__card_size_large'
+            open={props.open}
+            onClose={() => { props.setOpen(false) }}
         >
             <div className="modal__orders">
                 <form onSubmit={handleSubmit(onSubmit)}>

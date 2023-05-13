@@ -1,19 +1,21 @@
 import style from "./index.module.scss";
-import React from "react"
+import React, { ReactNode } from "react"
 type HeadingPropsType = {
     text: string,
     count: number
-    callBack?: () => void
+    callBack?: any
+    children?: ReactNode | ReactNode[]
 }
-const Heading: React.FC<HeadingPropsType> = (props) =>{
+const Heading: React.FC<HeadingPropsType> = (props) => {
     return (
         <div className={style.heading}>
-                    <div className={style.heading__button}>
-                        &#x271A;
-                    </div>
-                    <span>{props.text} / {props.count}</span>
-                </div>
+            <div className={style.heading__button} onClick={() => { props.callBack() }}>
+                &#x271A;
+            </div>
+            <span>{props.text} / {props.count}</span>
+            {props.children}
+        </div>
     )
 }
 
-export {Heading}
+export { Heading }
