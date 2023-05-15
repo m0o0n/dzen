@@ -28,8 +28,6 @@ const OrderCard: React.FC<PropsType> = ({ title, id, count_products, date, order
         }).reduce((a: number, c: number) => a + c)
         : 0
 
-    console.log(cost)
-
     return (
         <div className={style.order_card}>
             <div className={style.order_card__heading}>
