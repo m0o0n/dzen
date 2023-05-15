@@ -23,7 +23,22 @@ const Orders: React.FC = () => {
 
                 <ScrollList>
                     {orders.map(order => (
-                        <OrderCard id={order.id} title={order.title} />
+                        <OrderCard
+                            date={
+                                new Date(order.createdAt)
+                                    .toLocaleString('ru',
+                                        {
+                                            day: 'numeric',
+                                            month: 'short',
+                                            year: 'numeric'
+                                        })
+                            }
+                            order_products={order.order_products}
+                            count_products={order.order_products.length}
+                            key={order.id}
+                            id={order.id}
+                            title={order.title}
+                        />
                     ))}
                 </ScrollList>
             </div>

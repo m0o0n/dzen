@@ -1,4 +1,4 @@
-import { OrderResponseType, CreateOrderRequestType } from './../../models/order/queryTypes';
+import { OrderResponseType } from './../../models/order/queryTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createOrderThunk, deleteOrderThunk, fetchAllOrdersThunk } from './OrdersActions';
 import { InitialStateType } from './OrdersTypes';
