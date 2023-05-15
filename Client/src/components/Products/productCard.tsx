@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { ProductGuaranteeType, ProductPriceType } from '../../models/product/product';
+import { ProductPriceType } from '../../models/product/product';
 import IconTrash from '../common/icons/IconTrash';
 import { DeleteProductModal } from '../common/Modal/Products/deleteProductModal';
 import style from './products.module.scss'
 
 type ProductCardPropsType = {
+    id?: number
+    isNew?: number
     title?: string
     price?: ProductPriceType[] | any
     serial_number?: number
@@ -33,7 +35,7 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
             {
                 props.status && (
                     <div className={style.product__status}>
-                        <span>Новый</span>
+                        <span>{props.isNew ? "Новый" : "Б/У"}</span>
                     </div>
                 )
             }

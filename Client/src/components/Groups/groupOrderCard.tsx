@@ -3,22 +3,27 @@ import style from './groups.module.scss'
 import IconBars from "../common/icons/IconBars"
 import { NavLink } from 'react-router-dom'
 
-const GroupOrder: React.FC<any> = (props) => {
+type PropsType = {
+    id: number,
+    date: string,
+    count_products: number
+}
+const GroupOrder: React.FC<PropsType> = ({ id, date, count_products }) => {
     return (
-        <NavLink to={`/groups/${props.id}`}>
+        <NavLink to={`/groups/${id}`}>
             {({ isActive }) => (
 
                 <div className={isActive ? `${style.active} ${style.group_order}` : style.group_order}>
                     <div className={style.group_order__info}>
                         <IconBars />
                         <div>
-                            <span>22</span>
+                            <span>{count_products}</span>
                             <p>Продукта</p>
                         </div>
                     </div>
 
                     <div className={style.group_order__date}>
-                        <span>06 / Apr / 2017</span>
+                        <span>{date}</span>
                     </div>
                 </div>
             )}

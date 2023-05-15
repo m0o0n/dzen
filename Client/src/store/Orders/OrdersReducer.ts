@@ -1,11 +1,19 @@
 import { OrderResponseType } from './../../models/order/queryTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createOrderThunk, deleteOrderThunk, fetchAllOrdersThunk } from './OrdersActions';
+import { createOrderThunk, deleteOrderThunk, fetchAllOrdersThunk, fetchOneOrderThunk } from './OrdersActions';
 import { InitialStateType } from './OrdersTypes';
 
 
 const initialState: InitialStateType = {
     Orders: [],
+    CurrentOrder: {
+        id: 0,
+        title: '',
+        description: '',
+        createdAt: '',
+        updatedAt: '',
+        order_products: []
+    },
     isLoading: false,
     error: ''
 }
@@ -27,6 +35,23 @@ const ordersReducer = createSlice({
             state.Orders = [...action.payload]
         },
         [fetchAllOrdersThunk.rejected.type]: (
+            state,
+            action: PayloadAction<any>
+        ) => {
+            state.isLoading = false
+            state.error = action.payload
+        },
+        [fetchOneOrderThunk.pending.type]: state => {
+            state.isLoading = true
+        },
+        [fetchOneOrderThunk.fulfilled.type]: (
+            state,
+            action: PayloadAction<OrderResponseType>
+        ) => {
+            state.isLoading = false
+            state.CurrentOrder = action.payload
+        },
+        [fetchOneOrderThunk.rejected.type]: (
             state,
             action: PayloadAction<any>
         ) => {

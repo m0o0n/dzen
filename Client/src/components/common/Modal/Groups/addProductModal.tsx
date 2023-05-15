@@ -16,7 +16,7 @@ const AddProductModal: React.FC<any> = (props) => {
         >
             <div className='modal__groups'>
                 <h2>Выберете продукт из списка</h2>
-                <ScrollList>
+                {/* <ScrollList>
                     <div
                         className={
                             currentProduct === 1
@@ -119,7 +119,7 @@ const AddProductModal: React.FC<any> = (props) => {
                         />
                     </div>
 
-                </ScrollList>
+                </ScrollList> */}
 
                 <div className='modal__footer modal__groups__footer'>
                     <button className='modal__footer__cancel modal__groups__cancel' onClick={() => { props.setOpen(false) }}>ОТМЕНИТЬ</button>
