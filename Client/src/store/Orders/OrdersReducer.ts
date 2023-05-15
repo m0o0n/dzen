@@ -1,6 +1,6 @@
-import { OrderResponseType } from './../../models/order/queryTypes';
+import { OrderResponseType, CreateOrderRequestType } from './../../models/order/queryTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchAllOrdersThunk } from './OrdersActions';
+import { createOrderThunk, deleteOrderThunk, fetchAllOrdersThunk } from './OrdersActions';
 import { InitialStateType } from './OrdersTypes';
 
 
@@ -24,9 +24,43 @@ const ordersReducer = createSlice({
             state,
             action: PayloadAction<OrderResponseType[]>
         ) => {
-            state.Orders = [...state.Orders, ...action.payload]
+            state.Orders = [...action.payload]
         },
         [fetchAllOrdersThunk.rejected.type]: (
+            state,
+            action: PayloadAction<any>
+        ) => {
+            state.isLoading = false
+            state.error = action.payload
+        },
+        [createOrderThunk.pending.type]: state => {
+            state.isLoading = true
+        },
+        [createOrderThunk.fulfilled.type]: (
+            state,
+            action: PayloadAction<OrderResponseType>
+        ) => {
+            state.isLoading = false
+            state.Orders = [...state.Orders, action.payload]
+        },
+        [createOrderThunk.rejected.type]: (
+            state,
+            action: PayloadAction<any>
+        ) => {
+            state.isLoading = false
+            state.error = action.payload
+        },
+        [deleteOrderThunk.pending.type]: state => {
+            state.isLoading = true
+        },
+        [deleteOrderThunk.fulfilled.type]: (
+            state,
+            action: PayloadAction<any>
+        ) => {
+            state.isLoading = false
+            state.Orders = state.Orders.filter(order => order.id !== action.payload.id)
+        },
+        [deleteOrderThunk.rejected.type]: (
             state,
             action: PayloadAction<any>
         ) => {

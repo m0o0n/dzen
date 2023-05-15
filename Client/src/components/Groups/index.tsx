@@ -9,8 +9,8 @@ import { AddProductModal } from '../common/Modal/Groups/addProductModal';
 import { AddOrderModal } from '../common/Modal/Orders/addOrderModal';
 
 const Groups: React.FC = () => {
-    const [openForAddProduct, setOpenForAddProduct] = useState(false)
-    const [openForAddOrder, setOpenForAddOrder] = useState(false)
+    const [openForAddProduct, setOpenForAddProduct] = useState<boolean>(false)
+    const [openForAddOrder, setOpenForAddOrder] = useState<boolean>(false)
     return (
         <MainLayout>
             <div className={style.groups}>

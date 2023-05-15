@@ -6,7 +6,7 @@ import { OrderResponseType } from '../models/order/queryTypes';
 
 const createOrder = async (formData: AxiosRequestConfig<CreateOrderRequestType>) => {
     try {
-        const { data } = await $HostInstace.post<AxiosResponse<OrderResponseType>>('order', formData.data)
+        const { data } = await $HostInstace.post<AxiosResponse<OrderResponseType>>('order', formData)
         return data
     } catch (e: any) {
         throw new Error(e.message)
@@ -44,7 +44,7 @@ const update = async (formData: AxiosRequestConfig<UpdateOrderRequestType>) => {
 
 const deleteOrder = async (id: AxiosRequestConfig<{ id: number }>) => {
     try {
-        const { data } = await $HostInstace.delete<AxiosResponse<string>>('order', id)
+        const { data } = await $HostInstace.delete<AxiosResponse<{ id: number }>>('order', id)
         return data
     } catch (e: any) {
         throw new Error(e.message)
