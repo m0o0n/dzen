@@ -18,11 +18,15 @@ class OrderController {
             }
             const created_order = await Order.findOne({
                 where: { id: order.id },
-                include:
-                {
-                    model: OrderProduct,
-                    include: [Product],
-                }
+                include: [
+                    {
+                        model: OrderProduct,
+                        include: [{
+                            model: Product,
+                            include: [{ model: Guarantee, as: "guarantee" }, { model: ProductPrice, as: "price" }]
+                        }],
+                    }
+                ]
             })
             return res.json(created_order)
         } catch (e) {
@@ -99,7 +103,7 @@ class OrderController {
             const { id } = req.body
             await OrderProduct.destroy({ where: { orderId: id } })
             await Order.destroy({ where: { id } })
-            return res.json('Order has been deleted')
+            return res.json({ id })
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
