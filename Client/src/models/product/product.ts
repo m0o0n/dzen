@@ -13,8 +13,8 @@ export interface ProductType {
 }
 
 export type ProductGuaranteeType = {
-    start?: string
-    end?: string
+    start?: Date | string
+    end?: Date | string
     productId?: number
     createdAt?: string
     updatedAt?: string

@@ -24,7 +24,7 @@ const productsReducer = createSlice({
             action: PayloadAction<ProductType[]>
         ) => {
             state.isLoading = false
-            state.Products = [...state.Products, ...action.payload]
+            state.Products = [...action.payload]
         },
         [fetchAllProductsThunk.rejected.type]: (
             state,

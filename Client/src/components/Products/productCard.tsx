@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import { ProductGuaranteeType, ProductPriceType } from '../../models/product/product';
 import IconTrash from '../common/icons/IconTrash';
 import { DeleteProductModal } from '../common/Modal/Products/deleteProductModal';
 import style from './products.module.scss'
 
 type ProductCardPropsType = {
-    garantee: boolean | Array<string>
+    title?: string
+    price?: ProductPriceType[] | any
+    serial_number?: number
+    garantee: boolean
+    guarantee_start?: string | Date | any
+    guarantee_end?: string | Date | any
+    photo?: string
     date: boolean | string
     cost: boolean | Array<string>
     drop?: boolean
@@ -16,11 +23,11 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
         <div className={style.product}>
             <span className={style.product__circle}></span>
             <div className={style.product__image}>
-                <img alt='product' src='/images/me.jpg' />
+                <img alt='product' src={`http://localhost:5000/${props.photo}`} />
             </div>
             <div className={style.product__name}>
-                <span data-title="Gigabyte Technology X-58-USB3 Socket 1366 6 X-58-USB3">Gigabyte Technology X-58-USB3 Socket 1366 6 X-58-USB3</span>
-                <p>S/N 123456789</p>
+                <span data-title="Gigabyte Technology X-58-USB3 Socket 1366 6 X-58-USB3">{props.title}</span>
+                <p>S/N {props.serial_number}</p>
             </div>
 
             {
@@ -35,8 +42,28 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
             {
                 props.garantee && (
                     <div className={style.product__garantee}>
-                        <span>c 06 / 04 / 2017</span>
-                        <span>по 06 / 04 / 2020</span>
+
+                        <span>c &nbsp;
+                            {
+                                new Date(props.guarantee_start)
+                                    .toLocaleString('ru',
+                                        {
+                                            day: 'numeric',
+                                            month: 'numeric',
+                                            year: 'numeric'
+                                        }).split('.').join(' / ')
+                            }
+                        </span>
+                        <span>по &nbsp;
+                            {
+                                new Date(props.guarantee_end)
+                                    .toLocaleString('ru',
+                                        {
+                                            day: 'numeric',
+                                            month: 'numeric',
+                                            year: 'numeric'
+                                        }).split('.').join(' / ')
+                            }</span>
                     </div>
                 )
             }
@@ -44,8 +71,11 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
             {
                 props.cost && (
                     <div className={style.product__cost}>
-                        <span>100 USD</span>
-                        <span>2500 UAH</span>
+                        {props.price.map((price: ProductPriceType) => {
+                            return (
+                                <span>{price.value} {price.symbol}</span>
+                            )
+                        })}
                     </div>
                 )
             }

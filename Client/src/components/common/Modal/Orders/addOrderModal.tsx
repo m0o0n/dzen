@@ -1,11 +1,13 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Modal } from ".."
 import '../modal.scss'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ScrollList } from "../../ScrollList";
 import { ProductCard } from '../../../Products/productCard'
-import { useAppDispatch } from "../../../../store/redux";
+import { useAppDispatch, useAppSelector } from "../../../../store/redux";
 import { createOrderThunk } from "../../../../store/Orders/OrdersActions";
+import { ProductType } from "../../../../models/product/product";
+import { fetchAllProductsThunk } from "../../../../store/Products/productsActions";
 
 type Inputs = {
     title: string,
@@ -14,10 +16,14 @@ type Inputs = {
 };
 const AddOrderModal: React.FC<any> = (props) => {
     const dispatch = useAppDispatch()
+    const products = useAppSelector(state => state.Products.Products)
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = (data: any) => {
         dispatch(createOrderThunk(data))
     };
+    useEffect(() => {
+        dispatch(fetchAllProductsThunk())
+    }, [dispatch])
     return (
         <Modal
             backdrop_classes='modal__backdrop_size_content'
@@ -36,17 +42,23 @@ const AddOrderModal: React.FC<any> = (props) => {
                     <div className="modal__orders__products">
 
                         <ScrollList>
-                            {[1, 2, 3].map((el, i) => {
+                            {products.map((product: ProductType) => {
                                 return (
-                                    <label key={i} className="product_label">
+                                    <label key={product.id} className="product_label">
                                         <input
                                             type='checkbox'
-                                            id={`input_${el}`}
-                                            value={el}
+                                            id={`input_${product.id}`}
+                                            value={product.id}
                                             {...register("products", { required: 'Please select products' })}
                                         />
-                                        <label htmlFor={`input_${el}`}></label>
+                                        <label htmlFor={`input_${product.id}`}></label>
                                         <ProductCard
+                                            title={product.title}
+                                            price={product.price}
+                                            photo={product.photo}
+                                            serial_number={product.serialNumber}
+                                            guarantee_start={product.guarantee.start}
+                                            guarantee_end={product.guarantee.end}
                                             garantee={true}
                                             cost={true}
                                             date={false}
