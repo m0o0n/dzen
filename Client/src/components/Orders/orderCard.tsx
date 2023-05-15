@@ -1,4 +1,5 @@
 import React from "react"
+import { NavLink } from "react-router-dom"
 import { orderProducts } from "../../models/order/queryTypes"
 import { ProductPriceType } from "../../models/product/product"
 import { deleteOrderThunk } from "../../store/Orders/OrdersActions"
@@ -32,7 +33,7 @@ const OrderCard: React.FC<PropsType> = ({ title, id, count_products, date, order
     return (
         <div className={style.order_card}>
             <div className={style.order_card__heading}>
-                <h2>{title}</h2>
+                <h2><NavLink to={`/groups/${id}`}>{title}</NavLink></h2>
             </div>
 
             <div className={style.order_card__info}>
