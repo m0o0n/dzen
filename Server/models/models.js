@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize')
 
 const Product = sequelize.define('product', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    serialNumber: { type: DataTypes.INTEGER, unique: true, allowNull: false },
+    serialNumber: { type: DataTypes.STRING, unique: true, allowNull: false },
     isNew: { type: DataTypes.INTEGER, allowNull: false },
     photo: { type: DataTypes.STRING, unique: true, allowNull: false },
     title: { type: DataTypes.STRING, unique: true, allowNull: false },

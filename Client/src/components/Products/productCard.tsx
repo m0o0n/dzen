@@ -29,7 +29,7 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
                 <img alt='product' src={`http://localhost:5000/${props.photo}`} />
             </div>
             <div className={style.product__name}>
-                <span data-title="Gigabyte Technology X-58-USB3 Socket 1366 6 X-58-USB3">{props.title}</span>
+                <span>{props.title}</span>
                 <p>S/N {props.serial_number}</p>
             </div>
 
