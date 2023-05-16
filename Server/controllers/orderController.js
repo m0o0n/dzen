@@ -78,7 +78,7 @@ class OrderController {
     async update(req, res, next) {
         try {
             const { id, order_product_id, product_id } = req.body
-
+            console.log(id, order_product_id, product_id)
             if (order_product_id && !product_id) {
                 await OrderProduct.destroy({ where: { id: order_product_id } })
             } else if (!order_product_id && product_id) {

@@ -75,7 +75,15 @@ class ProductController {
                 })
             }
 
-            return res.json(product)
+            const created_product = await Product.findOne({
+                where: { id: product.id },
+                include: [
+                    { model: ProductPrice, as: 'price' },
+                    { model: Guarantee, as: 'guarantee' }
+                ]
+            })
+
+            return res.json(created_product)
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
@@ -90,7 +98,7 @@ class ProductController {
             await ProductPrice.destroy({ where: { productId: id } })
             await OrderProduct.destroy({ where: { productId: id } })
             await Product.destroy({ where: { id } })
-            return res.json("Product has been deleted")
+            return res.json({ message: "Product has been deleted", id })
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
