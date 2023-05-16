@@ -22,10 +22,11 @@ type PropsType = {
 }
 const AddOrderModal: React.FC<PropsType> = ({ open, setOpen }) => {
     const dispatch = useAppDispatch()
-    const products = useAppSelector(state => state.Products.Products)
+    const products: ProductType[] = useAppSelector(state => state.Products.Products)
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = (data: CreateOrderRequestType) => {
-        dispatch(createOrderThunk(data))
+    const onSubmit: SubmitHandler<Inputs> = async (data: CreateOrderRequestType) => {
+        const result = await dispatch(createOrderThunk(data))
+        result.meta.requestStatus === 'fulfilled' && setOpen(false)
     };
     useEffect(() => {
         dispatch(fetchAllProductsThunk())
