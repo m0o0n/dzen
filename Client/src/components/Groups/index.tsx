@@ -8,9 +8,9 @@ import { ProductCard } from '../Products/productCard';
 import { AddProductModal } from '../common/Modal/Groups/addProductModal';
 import { AddOrderModal } from '../common/Modal/Orders/addOrderModal';
 import { useAppDispatch, useAppSelector } from '../../store/redux';
-import { fetchAllOrdersThunk, fetchOneOrderThunk } from '../../store/Orders/OrdersActions';
+import { fetchAllOrdersThunk, fetchOneOrderThunk, updateOrderThunk } from '../../store/Orders/OrdersActions';
 import { NavLink, useParams } from 'react-router-dom';
-import { orderProducts, OrderResponseType } from '../../models/order/queryTypes';
+import { orderProducts, OrderResponseType, UpdateOrderRequestType } from '../../models/order/queryTypes';
 
 const Groups: React.FC = () => {
     const [openForAddProduct, setOpenForAddProduct] = useState<boolean>(false)
@@ -19,6 +19,12 @@ const Groups: React.FC = () => {
     const orders = useAppSelector(state => state.Orders.Orders)
     const current_order: OrderResponseType = useAppSelector(state => state.Orders.CurrentOrder)
     const params = useParams()
+
+    const deleteProductFromOrder = async (data: UpdateOrderRequestType) => {
+        await dispatch(updateOrderThunk({ data }))
+        await dispatch(fetchAllOrdersThunk())
+    }
+
     useEffect(() => {
         dispatch(fetchAllOrdersThunk())
     }, [dispatch])
@@ -58,7 +64,7 @@ const Groups: React.FC = () => {
                             <div className={style.groups__content}>
 
                                 <div className={style.groups__order_info}>
-                                    <h1>Long Long LOngest Name of Order</h1>
+                                    <h1>{current_order.title}</h1>
                                     <div className={style.groups__order_info__add} onClick={() => { setOpenForAddProduct(true) }}>
                                         <button>&#x271A;</button>
                                         <span>Добавить продукт</span>
@@ -68,7 +74,7 @@ const Groups: React.FC = () => {
                                 <ScrollList>
                                     {current_order.order_products.map((order_product: orderProducts) => (
                                         <ProductCard
-                                            key={order_product.product.id + order_product.id}
+                                            key={order_product.id}
                                             title={order_product.product.title}
                                             id={order_product.product.id}
                                             photo={order_product.product.photo}
@@ -78,6 +84,12 @@ const Groups: React.FC = () => {
                                             cost={false}
                                             date={false}
                                             drop={true}
+                                            deleteCallBack={() => {
+                                                deleteProductFromOrder({
+                                                    order_product_id: order_product.id,
+                                                    id: Number(params.id)
+                                                })
+                                            }}
                                         />
                                     ))}
 

@@ -16,6 +16,11 @@ const DeleteProductModal: React.FC<any> = (props) => {
                 <h2>Вы уверены что хотите удалить этот продукт?</h2>
 
                 <ProductCard
+                    title={props.title}
+                    photo={props.photo}
+                    isNew={props.isNew}
+                    serial_number={props.serial_number}
+                    status={true}
                     garantee={false}
                     drop={false}
                     date={false}
@@ -24,7 +29,7 @@ const DeleteProductModal: React.FC<any> = (props) => {
 
                 <div className={'modal__footer modal__product__footer'}>
                     <button className='modal__footer__cancel modal__product__cancel' onClick={() => { props.setOpen(false) }}>ОТМЕНИТЬ</button>
-                    <button className='modal__footer__action modal__product__action'><IconTrash /> УДАЛИТЬ</button>
+                    <button onClick={() => { props.delete() }} className='modal__footer__action modal__product__action'><IconTrash /> УДАЛИТЬ</button>
                 </div>
             </div>
         </Modal>

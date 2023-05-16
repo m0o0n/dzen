@@ -1,6 +1,6 @@
 import { ProductType } from './../../models/product/product';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchAllProductsThunk } from './productsActions';
+import { createProductThunk, deleteProudctThunk, fetchAllProductsThunk } from './productsActions';
 import { InitialStateType } from './productTypes';
 
 const initialState: InitialStateType = {
@@ -32,6 +32,34 @@ const productsReducer = createSlice({
         ) => {
             state.isLoading = false
             state.error = action.payload
+        },
+        [deleteProudctThunk.pending.type]: state => {
+            state.isLoading = true
+        },
+        [deleteProudctThunk.fulfilled.type]: (
+            state,
+            action: PayloadAction<{ data: { message: string, id: number } }>
+        ) => {
+            state.Products = state.Products.filter((product: ProductType) => product.id !== action.payload.data.id)
+            console.log(action)
+            state.isLoading = false
+        },
+        [deleteProudctThunk.rejected.type]: (
+            state,
+            action: PayloadAction<any>
+        ) => {
+            state.isLoading = false
+            state.error = action.payload
+        },
+        [createProductThunk.rejected.type]: state => {
+            state.isLoading = true
+        },
+        [createProductThunk.fulfilled.type]: (
+            state,
+            action: PayloadAction<ProductType>
+        ) => {
+            state.Products = [...state.Products, action.payload]
+            state.isLoading = false
         }
     },
 });

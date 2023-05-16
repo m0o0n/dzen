@@ -21,9 +21,10 @@ const deleteProduct = async (id: AxiosRequestConfig<{ id: number }>) => {
     }
 }
 
-const createProduct = async (formData: AxiosRequestConfig<ProudctRequestType>) => {
+const createProduct = async (formData: any) => {
     try {
-        const { data } = await $HostInstace.post<AxiosResponse<CreatedProductResponseType>>('/product', formData.data)
+        console.log(formData)
+        const { data } = await $HostInstace.post<any>('/product', formData)
         return data
     } catch (e: any) {
         throw new Error(e.message)

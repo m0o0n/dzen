@@ -15,7 +15,6 @@ const DropZone: React.FC<any> = ({ setValue, register, file, setFile, control })
 
     useEffect(() => {
         setFile(acceptedFiles[0]);
-        console.log(acceptedFiles[0])
     });
 
     return (

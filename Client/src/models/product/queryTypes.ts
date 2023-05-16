@@ -3,12 +3,12 @@ import { ProductGuaranteeType, ProductPriceType } from "./product";
 export interface ProudctRequestType {
     title: string,
     specification: string
-    typeId: number
-    isNew: number
+    typeId: string
+    isNew: string
     guarantee: ProductGuaranteeType[]
     price: ProductPriceType[]
-    photo: File
-    serialNumber: number
+    photo: File[]
+    serialNumber: string
 }
 
 export interface CreatedProductResponseType {

@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { deleteOrder } from '../../api/orders';
-import { getAll } from '../../api/products';
+import { createProduct, deleteProduct, getAll } from '../../api/products';
+import { ProudctRequestType } from '../../models/product/queryTypes';
 const fetchAllProductsThunk = createAsyncThunk(
     'products/getAll',
     (_, thunkAPI) => {
@@ -20,7 +20,7 @@ const deleteProudctThunk = createAsyncThunk(
     'products/delete',
     (id: AxiosRequestConfig<{ id: number }>, thunkAPI) => {
         try {
-            const response = deleteOrder(id)
+            const response = deleteProduct(id)
             return response
         } catch (e: any) {
             return thunkAPI.rejectWithValue(
@@ -30,4 +30,38 @@ const deleteProudctThunk = createAsyncThunk(
     }
 )
 
-export { fetchAllProductsThunk, deleteProudctThunk }
+const createProductThunk = createAsyncThunk(
+    'products/create',
+    (formData: ProudctRequestType, thunkAPI) => {
+        try {
+            const {
+                photo,
+                price,
+                guarantee,
+                title,
+                typeId,
+                isNew,
+                serialNumber,
+                specification
+            }: ProudctRequestType = formData
+            const fd: any = new FormData()
+
+            fd.append('price', JSON.stringify(price))
+            fd.append('guarantee', JSON.stringify(guarantee))
+            fd.append('title', title)
+            fd.append('typeId', typeId)
+            fd.append('isNew', isNew)
+            fd.append('serialNumber', serialNumber)
+            fd.append('specification', specification)
+            fd.append('photo', photo[0])
+            const response = createProduct(fd)
+            return response
+        } catch (e: any) {
+            return thunkAPI.rejectWithValue(
+                `Не вышло удалить продукт, произошла ошибка: ${e.message}`,
+            );
+        }
+    }
+)
+
+export { fetchAllProductsThunk, deleteProudctThunk, createProductThunk }

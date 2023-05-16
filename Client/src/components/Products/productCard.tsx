@@ -14,10 +14,11 @@ type ProductCardPropsType = {
     guarantee_start?: string | Date | any
     guarantee_end?: string | Date | any
     photo?: string
-    date: boolean | string
+    date: boolean | string | Date | any
     cost: boolean | Array<string>
     drop?: boolean
     status?: boolean | number
+    deleteCallBack?: any
 }
 const ProductCard: React.FC<ProductCardPropsType> = (props) => {
     const [open, setOpen] = useState(false)
@@ -85,7 +86,19 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
             {
                 props.date && (
                     <div className={style.product__date}>
-                        <span>по 06 / 04 / 2020</span>
+                        <span>
+
+                            {
+                                new Date(props.date)
+                                    .toLocaleString('ru',
+                                        {
+                                            day: 'numeric',
+                                            month: 'numeric',
+                                            year: 'numeric'
+                                        }).split('.').join(' / ')
+                            }
+
+                        </span>
                     </div>
                 )
             }
@@ -98,7 +111,15 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
                 )
             }
 
-            <DeleteProductModal open={open} setOpen={setOpen} />
+            <DeleteProductModal
+                title={props.title}
+                photo={props.photo}
+                serial_number={props.serial_number}
+                isNew={props.isNew}
+                delete={props.deleteCallBack}
+                open={open}
+                setOpen={setOpen}
+            />
 
         </div >
     )

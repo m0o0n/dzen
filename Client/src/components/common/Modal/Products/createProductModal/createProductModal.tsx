@@ -1,18 +1,22 @@
 
-import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState } from "react";
 import { Modal } from "../..";
 import { Select } from "./typesSelect";
 import { GuaranteeFieldsArray } from "./guaranteeFieldsArray";
 import { DropZone } from "./dropZone";
 import { CostFieldsArray } from "./costFieldsArray";
+import { useAppDispatch } from "../../../../../store/redux";
+import { createProductThunk } from "../../../../../store/Products/productsActions";
+import { ProudctRequestType } from "../../../../../models/product/queryTypes";
 
 type Inputs = {
-    photo: any
+    photo: File[]
     title: string
     specification: string
-    serialNumber: number
-    typeId: number | never
+    serialNumber: string
+    isNew: string
+    typeId: string
     guarantee: Array<{ start: Date | string, end: Date | string }>
     price: Array<{ value: number, isDefault: number, symbol: string }>
 }
@@ -20,14 +24,16 @@ type Inputs = {
 
 
 const CreateProductModal: React.FC<any> = (props) => {
+    const dispatch = useAppDispatch()
     const { register, handleSubmit, setValue, formState: { errors }, control } = useForm<Inputs>({
         defaultValues: {
+            photo: [],
             guarantee: [{ start: '', end: '' }],
             price: [{ value: 0, isDefault: 0, symbol: '' }],
         },
     });
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data)
+    const onSubmit: SubmitHandler<Inputs> = (formData: ProudctRequestType) => {
+        dispatch(createProductThunk(formData))
     };
     const [file, setFile] = useState(null);
     return (
@@ -68,6 +74,14 @@ const CreateProductModal: React.FC<any> = (props) => {
                         {...register("serialNumber", { required: true })}
                     />
                     {errors.serialNumber && <span>This field is required</span>}
+                    <input
+                        placeholder="Ведите серийный номер продукта"
+                        type='number'
+                        min={0}
+                        max={1}
+                        {...register("isNew", { required: true })}
+                    />
+                    {errors.isNew && <span>This field is required</span>}
 
                     <Select label="Выберете тип" {...register("typeId", { required: true, pattern: /\d{1,}/ })} />
                     {errors.typeId && <span>This field is required</span>}

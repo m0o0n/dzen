@@ -1,6 +1,7 @@
+import { OrderType } from './../../models/order/order';
 import { OrderResponseType } from './../../models/order/queryTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createOrderThunk, deleteOrderThunk, fetchAllOrdersThunk, fetchOneOrderThunk } from './OrdersActions';
+import { createOrderThunk, deleteOrderThunk, fetchAllOrdersThunk, fetchOneOrderThunk, updateOrderThunk } from './OrdersActions';
 import { InitialStateType } from './OrdersTypes';
 
 
@@ -86,6 +87,23 @@ const ordersReducer = createSlice({
             state.Orders = state.Orders.filter(order => order.id !== action.payload.id)
         },
         [deleteOrderThunk.rejected.type]: (
+            state,
+            action: PayloadAction<any>
+        ) => {
+            state.isLoading = false
+            state.error = action.payload
+        },
+        [updateOrderThunk.rejected.type]: state => {
+            state.isLoading = true
+        },
+        [updateOrderThunk.fulfilled.type]: (
+            state,
+            action: PayloadAction<OrderResponseType>
+        ) => {
+            state.Orders = [...state.Orders.filter((order: OrderResponseType) => order.id !== action.payload.id), action.payload]
+            state.CurrentOrder = action.payload
+        },
+        [updateOrderThunk.rejected.type]: (
             state,
             action: PayloadAction<any>
         ) => {
