@@ -30,7 +30,7 @@ class OrderController {
             })
             return res.json(created_order)
         } catch (e) {
-            next(ApiError.badRequest(e.message))
+            return next(ApiError.forbidden(e.message))
         }
     }
 
