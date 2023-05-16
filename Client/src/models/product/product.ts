@@ -21,6 +21,7 @@ export type ProductGuaranteeType = {
 }
 
 export type ProductPriceType = {
+    id?: number
     value: number
     symbol: string
     isDefault: number
