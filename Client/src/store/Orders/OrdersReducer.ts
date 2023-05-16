@@ -70,10 +70,10 @@ const ordersReducer = createSlice({
         },
         [createOrderThunk.rejected.type]: (
             state,
-            action: PayloadAction<any>
+            action: any
         ) => {
             state.isLoading = false
-            state.error = action.payload
+            state.error = action.error.message
         },
         [deleteOrderThunk.pending.type]: state => {
             state.isLoading = true

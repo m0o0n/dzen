@@ -7,9 +7,10 @@ import { OrderResponseType } from '../models/order/queryTypes';
 const createOrder = async (formData: CreateOrderRequestType) => {
     try {
         const { data } = await $HostInstace.post<AxiosResponse<OrderResponseType>>('order', formData)
+        console.log(data)
         return data
     } catch (e: any) {
-        throw new Error(e.message)
+        throw new Error(e.response.data.message)
     }
 }
 
