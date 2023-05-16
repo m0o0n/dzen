@@ -1,4 +1,3 @@
-import { OrderType } from './../../models/order/order';
 import { OrderResponseType } from './../../models/order/queryTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createOrderThunk, deleteOrderThunk, fetchAllOrdersThunk, fetchOneOrderThunk, updateOrderThunk } from './OrdersActions';
