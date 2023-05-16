@@ -23,6 +23,7 @@ type PropsType = {
 const AddOrderModal: React.FC<PropsType> = ({ open, setOpen }) => {
     const dispatch = useAppDispatch()
     const products: ProductType[] = useAppSelector(state => state.Products.Products)
+    const order_error: string = useAppSelector(state => state.Orders.error)
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async (data: CreateOrderRequestType) => {
         const result = await dispatch(createOrderThunk(data))
@@ -58,6 +59,7 @@ const AddOrderModal: React.FC<PropsType> = ({ open, setOpen }) => {
                                             value={product.id}
                                             {...register("products", { required: 'Please select products' })}
                                         />
+
                                         <label htmlFor={`input_${product.id}`}></label>
                                         <ProductCard
                                             title={product.title}
@@ -80,6 +82,7 @@ const AddOrderModal: React.FC<PropsType> = ({ open, setOpen }) => {
                     </div>
 
 
+                    {order_error && <div>{order_error}</div>}
 
                     <div className='modal__footer modal__orders__footer'>
 
