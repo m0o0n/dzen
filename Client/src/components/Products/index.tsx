@@ -31,6 +31,7 @@ const Product: React.FC<any> = (proos) => {
                         products.map((product: ProductType) => (
                             <ProductCard
                                 key={product.id}
+                                isNew={product.isNew}
                                 title={product.title}
                                 serial_number={product.serialNumber}
                                 price={product.price}

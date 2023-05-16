@@ -45,6 +45,8 @@ const AddProductModal: React.FC<PropsType> = ({ open, setOpen }) => {
                             onClick={() => { setCurrentProduct(product.id) }}
                         >
                             <ProductCard
+                                isNew={product.isNew}
+                                serial_number={product.serialNumber}
                                 title={product.title}
                                 photo={product.photo}
                                 price={product.price}

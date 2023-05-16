@@ -62,6 +62,7 @@ const AddOrderModal: React.FC<PropsType> = ({ open, setOpen }) => {
 
                                         <label htmlFor={`input_${product.id}`}></label>
                                         <ProductCard
+                                            isNew={product.isNew}
                                             title={product.title}
                                             price={product.price}
                                             photo={product.photo}

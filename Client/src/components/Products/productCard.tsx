@@ -6,14 +6,14 @@ import style from './products.module.scss'
 
 type ProductCardPropsType = {
     id?: number
-    isNew?: number
-    title?: string
+    isNew: number
+    title: string
     price?: ProductPriceType[] | any
-    serial_number?: number
+    serial_number: number
     garantee: boolean
     guarantee_start?: string | Date | any
     guarantee_end?: string | Date | any
-    photo?: string
+    photo: string
     date: boolean | string | Date | any
     cost: boolean | Array<string>
     drop?: boolean

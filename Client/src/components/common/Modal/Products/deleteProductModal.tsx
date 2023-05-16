@@ -3,8 +3,16 @@ import React from 'react'
 import { ProductCard } from '../../../Products/productCard'
 import { Modal } from '..'
 import IconTrash from '../../icons/IconTrash'
-
-const DeleteProductModal: React.FC<any> = (props) => {
+type PropsType = {
+    title: string,
+    photo: string
+    isNew: number
+    serial_number: number
+    open: boolean
+    setOpen: (state: boolean) => void
+    delete: () => void
+}
+const DeleteProductModal: React.FC<PropsType> = (props) => {
     return (
         <Modal
             open={props.open}

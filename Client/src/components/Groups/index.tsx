@@ -75,6 +75,7 @@ const Groups: React.FC = () => {
                                     {current_order.order_products.map((order_product: orderProducts) => (
                                         <ProductCard
                                             key={order_product.id}
+                                            serial_number={order_product.product.serialNumber}
                                             title={order_product.product.title}
                                             id={order_product.product.id}
                                             photo={order_product.product.photo}
