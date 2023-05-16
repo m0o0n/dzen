@@ -76,7 +76,7 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
                     <div className={style.product__cost}>
                         {props.price.map((price: ProductPriceType) => {
                             return (
-                                <span>{price.value} {price.symbol}</span>
+                                <span key={price.id}>{price.value} {price.symbol}</span>
                             )
                         })}
                     </div>
