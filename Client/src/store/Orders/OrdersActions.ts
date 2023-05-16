@@ -35,7 +35,7 @@ const fetchOneOrderThunk = createAsyncThunk(
 
 const createOrderThunk = createAsyncThunk(
     'orders/create',
-    (formData: AxiosRequestConfig<CreateOrderRequestType>, thunkAPI) => {
+    (formData: CreateOrderRequestType, thunkAPI) => {
         try {
             const response = createOrder(formData)
             return response

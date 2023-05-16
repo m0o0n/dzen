@@ -4,7 +4,7 @@ import { AxiosRequestConfig } from 'axios';
 import $HostInstace from "."
 import { OrderResponseType } from '../models/order/queryTypes';
 
-const createOrder = async (formData: AxiosRequestConfig<CreateOrderRequestType>) => {
+const createOrder = async (formData: CreateOrderRequestType) => {
     try {
         const { data } = await $HostInstace.post<AxiosResponse<OrderResponseType>>('order', formData)
         return data
