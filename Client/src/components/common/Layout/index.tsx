@@ -15,7 +15,6 @@ const MainLayout: React.FC<PropsType> = (props) => {
                 <NavBar />
                 <main>
                     {props.children}
-                    <div id="modal"></div>
                 </main>
             </div>
         </>
