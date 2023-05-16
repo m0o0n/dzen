@@ -8,17 +8,23 @@ import { useAppDispatch, useAppSelector } from "../../../../store/redux";
 import { createOrderThunk } from "../../../../store/Orders/OrdersActions";
 import { ProductType } from "../../../../models/product/product";
 import { fetchAllProductsThunk } from "../../../../store/Products/productsActions";
+import { CreateOrderRequestType } from "../../../../models/order/queryTypes";
 
 type Inputs = {
     title: string,
     description: string,
     products: number[]
 };
-const AddOrderModal: React.FC<any> = (props) => {
+
+type PropsType = {
+    open: boolean
+    setOpen: (state: boolean) => void
+}
+const AddOrderModal: React.FC<PropsType> = ({ open, setOpen }) => {
     const dispatch = useAppDispatch()
     const products = useAppSelector(state => state.Products.Products)
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = (data: any) => {
+    const onSubmit: SubmitHandler<Inputs> = (data: CreateOrderRequestType) => {
         dispatch(createOrderThunk(data))
     };
     useEffect(() => {
@@ -28,8 +34,8 @@ const AddOrderModal: React.FC<any> = (props) => {
         <Modal
             backdrop_classes='modal__backdrop_size_content'
             card_classes='modal__card_size_large'
-            open={props.open}
-            onClose={() => { props.setOpen(false) }}
+            open={open}
+            onClose={() => { setOpen(false) }}
         >
             <div className="modal__orders">
                 <h2>Создать Ордер</h2>
@@ -76,7 +82,7 @@ const AddOrderModal: React.FC<any> = (props) => {
 
                     <div className='modal__footer modal__orders__footer'>
 
-                        <button className='modal__footer__cancel modal__orders__cancel' onClick={() => { props.setOpen(false) }}>ОТМЕНИТЬ</button>
+                        <button className='modal__footer__cancel modal__orders__cancel' onClick={() => { setOpen(false) }}>ОТМЕНИТЬ</button>
                         {/* <button className='modal__footer__action modal__groups__action'>ОТПРАВИТЬ</button> */}
                         <input className='modal__footer__action modal__orders__action' type="submit" value="ОТПРАВИТЬ" />
                     </div>
