@@ -69,10 +69,11 @@ const AddOrderModal: React.FC<PropsType> = ({ open, setOpen }) => {
                                             serial_number={product.serialNumber}
                                             guarantee_start={product.guarantee.start}
                                             guarantee_end={product.guarantee.end}
-                                            garantee={true}
-                                            cost={true}
-                                            date={false}
-                                            drop={false}
+                                            isGarantee={true}
+                                            isCost={true}
+                                            isStatus={true}
+                                            isDate={false}
+                                            isDrop={false}
                                         />
                                     </label>
                                 )

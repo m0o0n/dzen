@@ -8,47 +8,62 @@ type ProductCardPropsType = {
     id?: number
     isNew: number
     title: string
-    price?: ProductPriceType[] | any
+    price: ProductPriceType[] | []
     serial_number: number
-    garantee: boolean
-    guarantee_start?: string | Date | any
-    guarantee_end?: string | Date | any
+    isGarantee: boolean
+    guarantee_start: Date | string
+    guarantee_end: Date | string
     photo: string
-    date: boolean | string | Date | any
-    cost: boolean | Array<string>
-    drop?: boolean
-    status?: boolean | number
+    date?: string | Date
+    isDate: boolean
+    isCost: boolean
+    isDrop: boolean
+    isStatus: boolean
     deleteCallBack?: any
 }
-const ProductCard: React.FC<ProductCardPropsType> = (props) => {
+const ProductCard: React.FC<ProductCardPropsType> = ({
+    isNew,
+    title,
+    price,
+    photo,
+    date,
+    serial_number,
+    isGarantee,
+    guarantee_start,
+    guarantee_end,
+    isCost,
+    isDrop,
+    isStatus,
+    deleteCallBack
+}) => {
     const [open, setOpen] = useState(false)
     return (
         <div className={style.product}>
             <span className={style.product__circle}></span>
             <div className={style.product__image}>
-                <img alt='product' src={`http://localhost:5000/${props.photo}`} />
+                <img alt='product' src={`http://localhost:5000/${photo}`} />
             </div>
             <div className={style.product__name}>
-                <span>{props.title}</span>
-                <p>S/N {props.serial_number}</p>
+                <span>{title}</span>
+                <p>S/N {serial_number}</p>
             </div>
 
             {
-                props.status && (
+                isStatus && (
                     <div className={style.product__status}>
-                        <span>{props.isNew ? "Новый" : "Б/У"}</span>
+                        <span>{isNew ? "Новый" : "Б/У"}</span>
                     </div>
                 )
             }
 
 
             {
-                props.garantee && (
+                isGarantee && (
                     <div className={style.product__garantee}>
 
                         <span>c &nbsp;
                             {
-                                new Date(props.guarantee_start)
+                                new Date(guarantee_start)
                                     .toLocaleString('ru',
                                         {
                                             day: 'numeric',
@@ -59,7 +74,7 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
                         </span>
                         <span>по &nbsp;
                             {
-                                new Date(props.guarantee_end)
+                                new Date(guarantee_end)
                                     .toLocaleString('ru',
                                         {
                                             day: 'numeric',
@@ -72,9 +87,9 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
             }
 
             {
-                props.cost && (
+                isCost && (
                     <div className={style.product__cost}>
-                        {props.price.map((price: ProductPriceType) => {
+                        {price.map((price: ProductPriceType) => {
                             return (
                                 <span key={price.id}>{price.value} {price.symbol}</span>
                             )
@@ -84,12 +99,12 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
             }
 
             {
-                props.date && (
+                date && (
                     <div className={style.product__date}>
                         <span>
 
                             {
-                                new Date(props.date)
+                                new Date(date)
                                     .toLocaleString('ru',
                                         {
                                             day: 'numeric',
@@ -104,7 +119,7 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
             }
 
             {
-                props.drop && (
+                isDrop && (
                     <button onClick={() => { setOpen(true) }}>
                         <IconTrash />
                     </button>
@@ -112,11 +127,11 @@ const ProductCard: React.FC<ProductCardPropsType> = (props) => {
             }
 
             <DeleteProductModal
-                title={props.title}
-                photo={props.photo}
-                serial_number={props.serial_number}
-                isNew={props.isNew}
-                delete={props.deleteCallBack}
+                title={title}
+                photo={photo}
+                serial_number={serial_number}
+                isNew={isNew}
+                drop={deleteCallBack}
                 open={open}
                 setOpen={setOpen}
             />

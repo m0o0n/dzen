@@ -38,11 +38,12 @@ const Product: React.FC<any> = (proos) => {
                                 guarantee_start={product.guarantee.start}
                                 guarantee_end={product.guarantee.end}
                                 photo={product.photo}
-                                status={true}
-                                garantee={true}
+                                isStatus={true}
+                                isGarantee={true}
                                 date={product.createdAt}
-                                cost={true}
-                                drop={true}
+                                isDate={true}
+                                isCost={true}
+                                isDrop={true}
                                 deleteCallBack={() => { deleteProduct(product.id) }}
                             />
                         ))

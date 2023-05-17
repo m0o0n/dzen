@@ -3,16 +3,16 @@ import React from 'react'
 import { ProductCard } from '../../../Products/productCard'
 import { Modal } from '..'
 import IconTrash from '../../icons/IconTrash'
-type PropsType = {
+type DeleteProductModalPropsType = {
     title: string,
     photo: string
     isNew: number
     serial_number: number
     open: boolean
     setOpen: (state: boolean) => void
-    delete: () => void
+    drop: () => void
 }
-const DeleteProductModal: React.FC<PropsType> = (props) => {
+const DeleteProductModal: React.FC<DeleteProductModalPropsType> = (props) => {
     return (
         <Modal
             open={props.open}
@@ -27,17 +27,20 @@ const DeleteProductModal: React.FC<PropsType> = (props) => {
                     title={props.title}
                     photo={props.photo}
                     isNew={props.isNew}
+                    price={[]}
+                    guarantee_start=''
+                    guarantee_end=''
                     serial_number={props.serial_number}
-                    status={true}
-                    garantee={false}
-                    drop={false}
-                    date={false}
-                    cost={false}
+                    isStatus={true}
+                    isGarantee={false}
+                    isDrop={false}
+                    isDate={false}
+                    isCost={false}
                 />
 
                 <div className={'modal__footer modal__product__footer'}>
                     <button className='modal__footer__cancel modal__product__cancel' onClick={() => { props.setOpen(false) }}>ОТМЕНИТЬ</button>
-                    <button onClick={() => { props.delete() }} className='modal__footer__action modal__product__action'><IconTrash /> УДАЛИТЬ</button>
+                    <button onClick={() => { props.drop() }} className='modal__footer__action modal__product__action'><IconTrash /> УДАЛИТЬ</button>
                 </div>
             </div>
         </Modal>

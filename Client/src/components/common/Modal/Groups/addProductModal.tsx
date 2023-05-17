@@ -52,11 +52,11 @@ const AddProductModal: React.FC<PropsType> = ({ open, setOpen }) => {
                                 price={product.price}
                                 guarantee_start={product.guarantee.start}
                                 guarantee_end={product.guarantee.end}
-                                status={true}
-                                garantee={true}
-                                cost={true}
-                                date={false}
-                                drop={false}
+                                isStatus={true}
+                                isGarantee={true}
+                                isCost={true}
+                                isDate={false}
+                                isDrop={false}
                             />
                         </div>
                     ))}

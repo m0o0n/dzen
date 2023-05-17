@@ -41,7 +41,7 @@ const Groups: React.FC = () => {
                 <div className={style.groups__container}>
                     <div className={style.groups__orders}>
                         <ScrollList>
-                            {orders.map(order => (
+                            {orders.map((order: OrderResponseType) => (
                                 <GroupOrder
                                     key={order.id}
                                     id={order.id}
@@ -77,14 +77,17 @@ const Groups: React.FC = () => {
                                             key={order_product.id}
                                             serial_number={order_product.product.serialNumber}
                                             title={order_product.product.title}
+                                            guarantee_start=''
+                                            guarantee_end=''
                                             id={order_product.product.id}
                                             photo={order_product.product.photo}
                                             isNew={order_product.product.isNew}
-                                            status={true}
-                                            garantee={false}
-                                            cost={false}
-                                            date={false}
-                                            drop={true}
+                                            price={order_product.product.price}
+                                            isStatus={true}
+                                            isGarantee={false}
+                                            isCost={false}
+                                            isDate={false}
+                                            isDrop={true}
                                             deleteCallBack={() => {
                                                 deleteProductFromOrder({
                                                     order_product_id: order_product.id,
