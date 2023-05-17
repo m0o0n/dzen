@@ -22,8 +22,11 @@ type Inputs = {
 }
 
 
-
-const CreateProductModal: React.FC<any> = (props) => {
+type CreateProductModalPropsType = {
+    open: boolean
+    setOpen: (state: boolean) => void
+}
+const CreateProductModal: React.FC<CreateProductModalPropsType> = ({ open, setOpen }) => {
     const dispatch = useAppDispatch()
     const { register, handleSubmit, setValue, formState: { errors }, control } = useForm<Inputs>({
         defaultValues: {
@@ -32,16 +35,17 @@ const CreateProductModal: React.FC<any> = (props) => {
             price: [{ value: 0, isDefault: 0, symbol: '' }],
         },
     });
-    const onSubmit: SubmitHandler<Inputs> = (formData: ProudctRequestType) => {
-        dispatch(createProductThunk(formData))
+    const onSubmit: SubmitHandler<Inputs> = async (formData: ProudctRequestType) => {
+        const result = await dispatch(createProductThunk(formData))
+        result.meta.requestStatus === 'fulfilled' && setOpen(false)
     };
     const [file, setFile] = useState(null);
     return (
         <Modal
             backdrop_classes='modal__backdrop_size_content'
             card_classes='modal__card_size_large'
-            open={props.open}
-            onClose={() => { props.setOpen(false) }}
+            open={open}
+            onClose={() => { setOpen(false) }}
         >
             <div className="modal__create_product">
 
@@ -91,7 +95,7 @@ const CreateProductModal: React.FC<any> = (props) => {
                     <CostFieldsArray register={register} control={control} />
 
                     <div className='modal__footer modal__product__footer'>
-                        <button className='modal__footer__cancel modal__create_product__cancel' onClick={() => { props.setOpen(false) }}>ОТМЕНИТЬ</button>
+                        <button className='modal__footer__cancel modal__create_product__cancel' onClick={() => { setOpen(false) }}>ОТМЕНИТЬ</button>
                         <input className='modal__footer__action modal__create_product__action' type="submit" value="ОТПРАВИТЬ" />
                     </div>
                 </form>

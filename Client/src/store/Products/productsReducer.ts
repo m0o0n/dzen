@@ -2,7 +2,6 @@ import { ProductType } from './../../models/product/product';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createProductThunk, deleteProudctThunk, fetchAllProductsThunk } from './productsActions';
 import { InitialStateType } from './productTypes';
-import { create } from 'domain';
 
 const initialState: InitialStateType = {
     Products: [],
