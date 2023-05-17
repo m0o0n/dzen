@@ -2,6 +2,7 @@ import { ProductType } from './../../models/product/product';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createProductThunk, deleteProudctThunk, fetchAllProductsThunk } from './productsActions';
 import { InitialStateType } from './productTypes';
+import { create } from 'domain';
 
 const initialState: InitialStateType = {
     Products: [],
@@ -28,10 +29,10 @@ const productsReducer = createSlice({
         },
         [fetchAllProductsThunk.rejected.type]: (
             state,
-            action: PayloadAction<any>
+            action: any
         ) => {
             state.isLoading = false
-            state.error = action.payload
+            state.error = action.error.message
         },
         [deleteProudctThunk.pending.type]: state => {
             state.isLoading = true
@@ -45,12 +46,12 @@ const productsReducer = createSlice({
         },
         [deleteProudctThunk.rejected.type]: (
             state,
-            action: PayloadAction<any>
+            action: any
         ) => {
             state.isLoading = false
-            state.error = action.payload
+            state.error = action.error.message
         },
-        [createProductThunk.rejected.type]: state => {
+        [createProductThunk.pending.type]: state => {
             state.isLoading = true
         },
         [createProductThunk.fulfilled.type]: (
@@ -58,6 +59,13 @@ const productsReducer = createSlice({
             action: PayloadAction<ProductType>
         ) => {
             state.Products = [...state.Products, action.payload]
+            state.isLoading = false
+        },
+        [createProductThunk.rejected.type]: (
+            state,
+            action: any
+        ) => {
+            state.error = action.error.message
             state.isLoading = false
         }
     },
