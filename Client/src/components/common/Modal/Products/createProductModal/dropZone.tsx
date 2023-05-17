@@ -4,7 +4,7 @@ import { Controller } from "react-hook-form";
 
 
 
-const DropZone: React.FC<any> = ({ setValue, register, file, setFile, control }) => {
+const DropZone: React.FC<any> = ({ setValue, file, setFile, control }) => {
 
     const { getRootProps, getInputProps, acceptedFiles, isDragActive } =
         useDropzone({

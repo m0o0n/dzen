@@ -1,11 +1,19 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { ReactNode, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import './modal.scss'
 
+
+type ModalPropsType = {
+    children: ReactNode | ReactNode[]
+    open: boolean
+    onClose: () => void
+    backdrop_classes: string
+    card_classes: string
+}
 const modalRootElament = document.querySelector('#modal')
 
-const Modal: React.FC<any> = (props) => {
-    const { children, open, onClose, backdrop_classes, card_classes } = props
+const Modal: React.FC<ModalPropsType> = ({ children, open, onClose, backdrop_classes, card_classes }) => {
+
     const element = useMemo(() => {
         return document.createElement("div")
     }, [])
