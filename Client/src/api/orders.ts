@@ -19,7 +19,7 @@ const getAll = async () => {
         const { data } = await $HostInstace.get<AxiosResponse<OrderResponseType[]>>('order')
         return data
     } catch (e: any) {
-        throw new Error(e.message)
+        throw new Error(e.response.data.message)
     }
 
 }
@@ -29,7 +29,7 @@ const getOne = async (id: number) => {
         const { data } = await $HostInstace.get<AxiosResponse<OrderResponseType>>(`order/${id}`)
         return data
     } catch (e: any) {
-        throw new Error(e.message)
+        throw new Error(e.response.data.message)
     }
 
 }
@@ -39,7 +39,7 @@ const update = async (formData: AxiosRequestConfig<UpdateOrderRequestType>) => {
         const { data } = await $HostInstace.put<AxiosResponse<OrderResponseType>>('order', formData.data)
         return data
     } catch (e: any) {
-        throw new Error(e.message)
+        throw new Error(e.response.data.message)
     }
 }
 
@@ -48,7 +48,7 @@ const deleteOrder = async (id: AxiosRequestConfig<{ id: number }>) => {
         const { data } = await $HostInstace.delete<AxiosResponse<{ id: number }>>('order', id)
         return data
     } catch (e: any) {
-        throw new Error(e.message)
+        throw new Error(e.response.data.message)
     }
 
 }
