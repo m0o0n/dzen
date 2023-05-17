@@ -21,8 +21,12 @@ const AddProductModal: React.FC<PropsType> = ({ open, setOpen }) => {
     const [currentProduct, setCurrentProduct] = useState<null | number>(null)
     const dispatch = useAppDispatch()
     const addProductToOrder = async (data: UpdateOrderRequestType) => {
-        await dispatch(updateOrderThunk({ data }))
-        await dispatch(fetchAllOrdersThunk())
+        const result = await dispatch(updateOrderThunk({ data }))
+        result.meta.requestStatus === 'fulfilled'
+            && (async function () {
+                await dispatch(fetchAllOrdersThunk())
+                setOpen(false)
+            })()
     }
     return (
         <Modal
