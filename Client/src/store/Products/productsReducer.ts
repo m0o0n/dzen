@@ -41,7 +41,6 @@ const productsReducer = createSlice({
             action: PayloadAction<{ data: { message: string, id: number } }>
         ) => {
             state.Products = state.Products.filter((product: ProductType) => product.id !== action.payload.data.id)
-            console.log(action)
             state.isLoading = false
         },
         [deleteProudctThunk.rejected.type]: (
