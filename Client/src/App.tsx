@@ -5,10 +5,14 @@ import { useAppDispatch } from './store/redux';
 import { fetchAllProductsThunk } from './store/Products/productsActions';
 import { fetchAllOrdersThunk } from './store/Orders/OrdersActions';
 import { MainLayout } from './components/common/Layout';
+import { socket } from '.';
+
+
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
+    socket.emit('join')
     dispatch(fetchAllProductsThunk())
     dispatch(fetchAllOrdersThunk())
   })
@@ -23,4 +27,4 @@ const App: React.FC = () => {
   );
 }
 
-export default App;
+export default App
