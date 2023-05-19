@@ -38,8 +38,11 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
     socket.on('userCount', (_, callBack) => {
         callBack(socket.client.conn.server.clientsCount)
+        socket.broadcast.emit('userCount', socket.client.conn.server.clientsCount)
     })
+
     socket.on('disconnect', () => {
+        socket.broadcast.emit('userCount', socket.client.conn.server.clientsCount)
         console.log("----------- Disconnect --------")
     })
 })

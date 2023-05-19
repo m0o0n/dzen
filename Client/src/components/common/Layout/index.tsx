@@ -4,6 +4,8 @@ import style from "./layout.module.scss"
 import { Header } from "./header"
 import { socket } from "../../.."
 
+
+
 type PropsType = {
     children: ReactNode | ReactNode[]
 }
@@ -11,8 +13,16 @@ type PropsType = {
 
 const MainLayout: React.FC<PropsType> = (props) => {
     const [usersCount, setUsersCount] = useState<number>(0)
+    // socket.on('userCount', (...response: any) => { console.log(response) })
     useEffect(() => {
-        socket.emit('userCount', '', (response: number) => { setUsersCount(response) })
+        socket.on('userCount', (response: number) => {
+            setUsersCount(response)
+            console.log(response)
+        })
+        socket.emit('userCount', '', (response: any) => {
+            setUsersCount(response)
+            console.log(response)
+        })
     }, [usersCount])
     return (
         <>
