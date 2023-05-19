@@ -2,10 +2,13 @@ import React from 'react';
 import style from "./layout.module.scss"
 import IconGuard from '../icons/IconGuard';
 import IconClock from '../icons/IconClock';
+import Moment from 'react-moment';
+import 'moment/locale/ru';
 type HeaderPropsType = {
     users: number
 }
 const Header: React.FC<HeaderPropsType> = ({ users }) => {
+
     return (
         <header className={style.header}>
             <div className={style.header__container}>
@@ -20,12 +23,12 @@ const Header: React.FC<HeaderPropsType> = ({ users }) => {
 
                 <div className={style.header__time}>
                     <div className={style.header__date}>
-                        <span>Monday</span>
+                        <span><Moment format="dddd" locale="ru" interval={1000} /></span>
                         <span>Active Pages: {users}</span>
                         <div className={style.header__clock}>
-                            <span>06 Апр, 2023</span>
+                            <span><Moment format="DD MMM, YYYY" locale="ru" interval={1000} /></span>
                             <IconClock />
-                            <span>17:20</span>
+                            <span><Moment format="HH:mm" interval={1000} /></span>
                         </div>
                     </div>
                 </div>
