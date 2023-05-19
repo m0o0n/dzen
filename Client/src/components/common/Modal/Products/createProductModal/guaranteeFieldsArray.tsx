@@ -12,7 +12,7 @@ const GuaranteeFieldsArray = ({ control, errors, register }: any) => {
         <div>
             {fields.map((field, i) => {
                 return (
-                    <div key={i}>
+                    <div className="modal__create_product__guarantee" key={i}>
                         <Controller
                             control={control}
                             name={`guarantee.${i}.start`}
@@ -23,6 +23,7 @@ const GuaranteeFieldsArray = ({ control, errors, register }: any) => {
                                         <DemoContainer components={['DateTimePicker']}>
                                             <DateTimePicker
                                                 onChange={onChange}
+                                                className="modal__create_product__muipicker"
                                                 label="Выберете дату начала гарантии"
                                                 views={["day", "month", "year"]}
                                                 format="DD/MM/YYYY"
@@ -43,6 +44,7 @@ const GuaranteeFieldsArray = ({ control, errors, register }: any) => {
                                         <DemoContainer components={['DateTimePicker']}>
                                             <DateTimePicker
                                                 onChange={onChange}
+                                                className="modal__create_product__muipicker"
                                                 label="Выберете дату окончания гарантии"
                                                 views={["day", "month", "year"]}
                                                 format="DD/MM/YYYY"

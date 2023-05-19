@@ -1,20 +1,21 @@
 import React from "react";
-
 import { UseFormRegister } from "react-hook-form";
+
 interface IFormValues {
-    typeId: number | never;
+    symbol: number;
 }
-const Select = React.forwardRef<
+const SymbolCostSelect = React.forwardRef<
     HTMLSelectElement,
     { label: string } & ReturnType<UseFormRegister<IFormValues>>
 >(({ onChange, onBlur, name, label }, ref) => (
     <div className="modal__create_product__select">
         <label>{label}</label>
         <select name={name} ref={ref} onChange={onChange} onBlur={onBlur}>
-            <option defaultValue="Please Select">Please Select</option>
-            <option value={1}>Monitor</option>
+            <option value={"uah"}>uah</option>
+            <option value={"usd"}>usd</option>
+            <option value={"eur"}>eur</option>
         </select>
     </div>
 ));
 
-export { Select }
+export { SymbolCostSelect }

@@ -4,6 +4,15 @@ import { Controller } from "react-hook-form";
 
 
 
+const ImagePreview: React.FC<any> = ({ file, setFile }) => {
+    return (
+        <div className="modal__create_product__preview">
+            <img alt="prewiew" src={URL.createObjectURL(file)} />
+            <button onClick={() => { setFile(null) }}>clear</button>
+        </div>
+    )
+}
+
 const DropZone: React.FC<any> = ({ setValue, file, setFile, control }) => {
 
     const { getRootProps, getInputProps, acceptedFiles, isDragActive } =
@@ -24,7 +33,7 @@ const DropZone: React.FC<any> = ({ setValue, file, setFile, control }) => {
             rules={{ required: true }}
             render={({ field: { onChange } }) => {
                 return (
-                    <div {...getRootProps()}>
+                    <div className="modal__create_product__dropzone" {...getRootProps()}>
                         <input
                             type="file"
                             {...getInputProps({ onChange })}
@@ -37,12 +46,10 @@ const DropZone: React.FC<any> = ({ setValue, file, setFile, control }) => {
                             </div>
                         ) : (
                             <div>
-
                                 <p>Chose Main Photo</p>
                             </div>
                         )}
-                        {file ? <img style={{ "height": "100px" }} alt="prewiew" src={URL.createObjectURL(file)} /> : null}
-                        <div onClick={() => { setFile(null) }}>clear</div>
+                        {file ? <ImagePreview file={file} setFile={setFile} /> : null}
 
                     </div>
                 )

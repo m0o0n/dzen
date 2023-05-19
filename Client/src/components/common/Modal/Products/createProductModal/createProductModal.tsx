@@ -9,6 +9,8 @@ import { CostFieldsArray } from "./costFieldsArray";
 import { useAppDispatch } from "../../../../../store/redux";
 import { createProductThunk } from "../../../../../store/Products/productsActions";
 import { ProudctRequestType } from "../../../../../models/product/queryTypes";
+import { StatusSelect } from "./statusSelect";
+import { ScrollList } from "../../../ScrollList";
 
 type Inputs = {
     photo: File[]
@@ -47,60 +49,61 @@ const CreateProductModal: React.FC<CreateProductModalPropsType> = ({ open, setOp
             open={open}
             onClose={() => { setOpen(false) }}
         >
-            <div className="modal__create_product">
 
-                <form onSubmit={handleSubmit(onSubmit)}>
 
+            <form className="modal__create_product" onSubmit={handleSubmit(onSubmit)}>
+                <div className="modal__create_product__inputsGroup">
                     <DropZone
                         setValue={setValue}
                         file={file}
                         setFile={setFile}
                         control={control}
                     />
+                    <div className="column_flex">
+                        <ScrollList>
+                            <input
+                                placeholder="Ведите заголовок для продукта"
+                                type='text'
 
-                    <input
-                        placeholder="Ведите заголовок для продукта"
-                        type='text'
-                        {...register("title", { required: true })}
-                    />
-                    {errors.title && <span>This field is required</span>}
+                                {...register("title", { required: true })}
+                            />
+                            {errors.title && <span>This field is required</span>}
 
-                    <input
-                        placeholder="Ведите спецификацию для продукта"
-                        type='text'
-                        {...register("specification", { required: true })}
-                    />
-                    {errors.specification && <span>This field is required</span>}
+                            <input
+                                placeholder="Ведите спецификацию для продукта"
+                                type='text'
+                                {...register("specification", { required: true })}
+                            />
+                            {errors.specification && <span>This field is required</span>}
 
-                    <input
-                        placeholder="Ведите серийный номер продукта"
-                        type='number'
-                        {...register("serialNumber", { required: true })}
-                    />
-                    {errors.serialNumber && <span>This field is required</span>}
-                    <input
-                        placeholder="Ведите серийный номер продукта"
-                        type='number'
-                        min={0}
-                        max={1}
-                        {...register("isNew", { required: true })}
-                    />
-                    {errors.isNew && <span>This field is required</span>}
+                            <input
+                                placeholder="Ведите серийный номер продукта"
+                                type='number'
+                                {...register("serialNumber", { required: true })}
+                            />
+                            {errors.serialNumber && <span>This field is required</span>}
 
-                    <Select label="Выберете тип" {...register("typeId", { required: true, pattern: /\d{1,}/ })} />
-                    {errors.typeId && <span>This field is required</span>}
 
-                    <GuaranteeFieldsArray errors={errors} register={register} control={control} />
+                            <StatusSelect label="Выберете статус продукта:" {...register("isNew", { required: true, pattern: /\d{1,}/ })} />
+                            {errors.isNew && <span>This field is required</span>}
 
-                    <CostFieldsArray register={register} control={control} />
+                            <Select label="Выберете тип:" {...register("typeId", { required: true, pattern: /\d{1,}/ })} />
+                            {errors.typeId && <span>This field is required</span>}
 
-                    <div className='modal__footer modal__product__footer'>
-                        <button className='modal__footer__cancel modal__create_product__cancel' onClick={() => { setOpen(false) }}>ОТМЕНИТЬ</button>
-                        <input className='modal__footer__action modal__create_product__action' type="submit" value="ОТПРАВИТЬ" />
+                            <GuaranteeFieldsArray errors={errors} register={register} control={control} />
+                        </ScrollList>
+
                     </div>
-                </form>
 
-            </div>
+                </div>
+
+                <CostFieldsArray register={register} control={control} />
+
+                <div className='modal__footer modal__product__footer'>
+                    <button className='modal__footer__cancel modal__create_product__cancel' onClick={() => { setOpen(false) }}>ОТМЕНИТЬ</button>
+                    <input className='modal__footer__action modal__create_product__action' type="submit" value="ОТПРАВИТЬ" />
+                </div>
+            </form>
         </Modal >
     )
 }
