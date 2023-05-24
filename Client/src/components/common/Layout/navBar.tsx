@@ -52,18 +52,10 @@ const NavBar: React.FC = () => {
                         />
                     </li>
                     <li>
-                        <CustomLink
-                            to="/"
-                            style={style.active}
-                            text="Пользователи"
-                        />
+                        <a>Пользователи</a>
                     </li>
                     <li>
-                        <CustomLink
-                            to="/"
-                            style={style.active}
-                            text="Настройки"
-                        />
+                        <a>Настройки</a>
                     </li>
                 </ul>
             </nav>

@@ -22,7 +22,7 @@ const Product: React.FC<any> = (proos) => {
     return (
         <MainLayout>
             <div className={style.products}>
-                <Heading text='Продукты' callBack={() => { setOpenForCreateProductModal(true) }} count={25} >
+                <Heading text='Продукты' callBack={() => { setOpenForCreateProductModal(true) }} count={products.length} >
                     <CreateProductModal open={openForCreateProductModal} setOpen={setOpenForCreateProductModal} />
                 </Heading>
 

@@ -20,7 +20,7 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<Orders />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/groups" element={<Groups />}>
           <Route path="/groups/:id" element={<Groups />} />

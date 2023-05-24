@@ -34,7 +34,7 @@ const CostFieldsArray: React.FC<any> = ({ control, register }) => {
                 onClick={
                     (e: React.MouseEvent) => {
                         e.preventDefault()
-                        append({ value: "", isDefault: "", symbol: "" })
+                        append({ value: "0", isDefault: "0", symbol: "" })
                     }}
             >
                 Add

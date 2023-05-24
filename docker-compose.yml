@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+  # Create frontend container
+  frontend: # Name of our service
+    build: ./Client # path to dockerfile
+    ports: # Port binding to host from docker container
+      - "3000:3000" # Bind port 3000 of host to 3000 of container
+    container_name: frontend-docker
+    restart: always # What to do if container crashes
+    links:
+      - backend
+  # Create backend container
+  
+  # Create database container
+  db:
+    image: postgres
+    ports:
+    - "5432:5432"
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes: 
+      - db:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  backend:
+    # Create backend container  
+    build: ./Server
+    ports:
+      - "5000:5000"
+    volumes:
+      - /usr/src/app/backend
+      - /usr/src/app/backend/node_modules
+      - /usr/src/app/backend/static
+    container_name: backend-docker
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
+    restart: always
+    links:
+      - db
+volumes:
+  db:
+    driver: local

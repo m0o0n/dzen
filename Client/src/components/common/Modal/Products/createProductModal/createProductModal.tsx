@@ -11,6 +11,7 @@ import { createProductThunk } from "../../../../../store/Products/productsAction
 import { ProudctRequestType } from "../../../../../models/product/queryTypes";
 import { StatusSelect } from "./statusSelect";
 import { ScrollList } from "../../../ScrollList";
+import { ProductPriceType } from "../../../../../models/product/product";
 
 type Inputs = {
     photo: File[]
@@ -37,9 +38,30 @@ const CreateProductModal: React.FC<CreateProductModalPropsType> = ({ open, setOp
             price: [{ value: 0, isDefault: 0, symbol: '' }],
         },
     });
+    const [submit_err, setErr] = useState('')
+    const submitValidation = (price: ProductPriceType[]) => {
+        const defult_count = price.filter((el: ProductPriceType) => el.isDefault === '1').length
+        const uah_count = price.filter((el: ProductPriceType) => el.symbol === 'uah').length
+        const symbols = price.map((el: ProductPriceType) => el.symbol)
+        if (defult_count > 1) {
+            setErr("Default currency must be one")
+            return false
+        } else if (uah_count !== 1) {
+            setErr("Currency in UAH is required")
+            return false
+        } else if (new Set(symbols).size !== price.length) {
+            setErr("Currency is duplicated")
+            return false
+        } else {
+            setErr('')
+            return true
+        }
+    }
     const onSubmit: SubmitHandler<Inputs> = async (formData: ProudctRequestType) => {
-        const result = await dispatch(createProductThunk(formData))
-        result.meta.requestStatus === 'fulfilled' && setOpen(false)
+        if (submitValidation(formData.price)) {
+            const result = await dispatch(createProductThunk(formData))
+            result.meta.requestStatus === 'fulfilled' && setOpen(false)
+        }
     };
     const [file, setFile] = useState(null);
     return (
@@ -99,6 +121,7 @@ const CreateProductModal: React.FC<CreateProductModalPropsType> = ({ open, setOp
 
                 <CostFieldsArray register={register} control={control} />
 
+                {submit_err && <span>{submit_err}</span>}
                 <div className='modal__footer modal__product__footer'>
                     <button className='modal__footer__cancel modal__create_product__cancel' onClick={() => { setOpen(false) }}>ОТМЕНИТЬ</button>
                     <input className='modal__footer__action modal__create_product__action' type="submit" value="ОТПРАВИТЬ" />

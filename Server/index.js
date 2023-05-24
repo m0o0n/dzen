@@ -46,12 +46,13 @@ io.on('connection', (socket) => {
         console.log("----------- Disconnect --------")
     })
 })
-
+// app.listen(PORT, () => console.log(`Server have been started on Port ${PORT}`))
 const start = async () => {
     try {
         await sequelize.authenticate()
         await sequelize.sync()
-        server.listen(PORT, () => console.log(`Server have been started on Port ${PORT}`))
+        await console.log("db conected")
+        server.listen(PORT, () => console.log(`Server1 have been started on Port ${PORT}`))
     } catch (e) {
         console.log(e)
     }
