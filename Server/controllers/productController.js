@@ -93,7 +93,9 @@ class ProductController {
         try {
             const { id } = req.body
             const product = await Product.findOne({ where: { id } })
-            fs.unlinkSync(path.resolve(__dirname, '..', 'static', product.photo))
+            if(fs.existsSync(path.resolve(__dirname, '..', 'static', product.photo))) {
+                fs.unlinkSync(path.resolve(__dirname, '..', 'static', product.photo))
+            }
             await Guarantee.destroy({ where: { productId: id } })
             await ProductPrice.destroy({ where: { productId: id } })
             await OrderProduct.destroy({ where: { productId: id } })
