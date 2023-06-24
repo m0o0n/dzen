@@ -10,7 +10,7 @@ const IsDefaultCostSelect = React.forwardRef<
 >(({ onChange, onBlur, name, label }, ref) => (
     <div className="modal__create_product__select">
         <label>{label}</label>
-        <select name={name} ref={ref} onChange={onChange} onBlur={onBlur}>
+        <select name={name} ref={ref} defaultValue="Please Select" onChange={onChange} onBlur={onBlur}>
             <option value={0} defaultValue="Please Select">Please Select</option>
             <option value={1}>Default</option>
         </select>

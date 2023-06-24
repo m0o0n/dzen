@@ -26,7 +26,11 @@ const AddOrderModal: React.FC<PropsType> = ({ open, setOpen }) => {
     const order_error: string = useAppSelector(state => state.Orders.error)
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async (data: CreateOrderRequestType) => {
-        const result = await dispatch(createOrderThunk(data))
+        const result = await dispatch(createOrderThunk({
+            title: data.title,
+            description: data.description,
+            products: !data.products ? [] : Array.isArray( data.products ) ? data.products : [data.products]
+        }))
         result.meta.requestStatus === 'fulfilled' && setOpen(false)
     };
     useEffect(() => {
@@ -57,7 +61,7 @@ const AddOrderModal: React.FC<PropsType> = ({ open, setOpen }) => {
                                             type='checkbox'
                                             id={`input_${product.id}`}
                                             value={product.id}
-                                            {...register("products", { required: 'Please select products' })}
+                                            {...register("products", { required: false })}
                                         />
 
                                         <label htmlFor={`input_${product.id}`}></label>

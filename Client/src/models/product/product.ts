@@ -24,7 +24,7 @@ export type ProductPriceType = {
     id?: number
     value: number
     symbol: string
-    isDefault: number
+    isDefault: number | string
     productId?: number
     createdAt?: string
     updatedAt?: string

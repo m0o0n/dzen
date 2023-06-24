@@ -17,7 +17,7 @@ const Orders: React.FC = () => {
     return (
         <MainLayout>
             <div className={style.orders}>
-                <Heading text="Приходы" count={25} callBack={() => { setOpenForAddOrder(true) }} >
+                <Heading text="Приходы" count={orders.length} callBack={() => { setOpenForAddOrder(true) }} >
                     <AddOrderModal open={openForAddOrder} setOpen={setOpenForAddOrder} />
                 </Heading>
 
